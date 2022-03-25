@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 18:48:31 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/03/24 16:31:58 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/03/25 10:58:52 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,5 @@ void		ft_check_map(char **map, int size, int len);
 void		ft_char_map(char **map, int i, int j, int size, int len);
 t_position	ft_position(char **map, int i, int j);
 t_position	ft_position_pec(char **map, char a, int size, int len);
+void	ft_check_extention(int ac, char *av[]);
 #endif
