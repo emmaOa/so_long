@@ -13,15 +13,21 @@ void	ft_prnt(char *str)
 	}
 }
 
-void	ft_map(char *path)
+void fatal(char *s)
+{
+	ft_prnt("Error\n");
+	ft_prnt(s);
+	exit(1);
+}
+
+t_so_long	ft_map(char *path)
 {
 	t_list *map;
 	char *tmp;
-	char	**vl_map;
+	// char	**vl_map;
+	t_so_long	solong;
 	int	fd;
 	int i;
-	size_t len;
-	int size;
 
 	i = 0;
 	map = NULL;
@@ -31,49 +37,47 @@ void	ft_map(char *path)
 		ft_prnt("error8");
 		exit (1);
 	}
-		// protect fd
 	tmp = get_next_line(fd);
-	len = ft_strlen(tmp);
+	solong.len = ft_strlen(tmp);
 	while (tmp != NULL)
 	{
 		ft_lstadd_back(&map, ft_lstnew(tmp));
 		tmp = get_next_line(fd);
 	}
 
-	size = ft_lstsize(map);
-	vl_map = malloc(( size + 1) * sizeof(char *));
+	solong.size = ft_lstsize(map);
+	solong.map = malloc(( solong.size + 1) * sizeof(char *));
 	while (map != NULL)
 	{
-		if ((map->next == NULL && len - 1 != ft_strlen(map->content)) || (len != ft_strlen(map->content) && map->next != NULL))
+		if ((map->next == NULL && solong.len - 1 != ft_strlen(map->content)) || (solong.len != ft_strlen(map->content) && map->next != NULL))
 		{
 			ft_prnt("error4");
 			exit (1);
 		}
-		vl_map[i++] = map->content;
-		ft_prnt(vl_map[i - 1]); 
+		solong.map[i++] = map->content;
+		ft_prnt(solong.map[i - 1]); 
 		map = map->next;
 	}
-	len = ft_strlen(vl_map[0]);
-	ft_check_map(vl_map, size, len);
+	solong.len = ft_strlen(solong.map[0]);
+	ft_check_map(solong.map, solong);
+	return (solong);
 }
 
-void	ft_check_map(char **map, int size, int len)
+void	ft_check_map(char **map, t_so_long solong)
 {
 	int	i;
-	int	j;
+	size_t	j;
 	int	p;
-	t_position	position;
-	t_valid		valid;
 
 	i = 0;
 	p = 0;
-	valid.c = 0;
-	valid.p = 0;
-	valid.e = 0;
-	while (i < size)
+	solong.c = 0;
+	solong.p = 0;
+	solong.e = 0;
+	while (i < solong.size)
 	{
 		j = 0;
-		while (j < len - 1)
+		while (j < solong.len - 1)
 		{
 			if (map[i][j] != 'P' && map[i][j] != 'C' && map[i][j] != 'E'
 				&& map[i][j] != '0' && map[i][j] != '1' && map[i][j] != ' ')
@@ -84,15 +88,15 @@ void	ft_check_map(char **map, int size, int len)
 			if (map[i][j] != '1')
 			{
 				if (map[i][j] == 'C')
-					valid.c = 1;
+					solong.c = 1;
 				if (map[i][j] == 'P' || map[i][j] == 'E')
 				{
 					if (map[i][j] == 'P')
-						valid.p = 1;
+						solong.p = 1;
 					if (map[i][j] == 'E')
-						valid.e = 1;
-					position = ft_position(map, i, j);
-					if (position.p == 1)
+						solong.e = 1;
+					ft_position(map, i, j, &solong);
+					if (solong.num_p == 1)
 						p++;
 					if (p > 1)
 					{
@@ -100,22 +104,23 @@ void	ft_check_map(char **map, int size, int len)
 						exit (1);
 					}
 				}
-				ft_char_map(map, i, j, size, len);
+				
+				ft_char_map(map, i, j, solong);
 			}
 			j++;
 		}
 		i++;
 	}
-	if (valid.p == 0 || valid.e == 0 || valid.c == 0)
+	if (solong.c == 0 || solong.e == 0 || solong.p == 0)
 	{
 		ft_prnt("error5");
 		exit (1);
 	}
 }
 
-void	ft_char_map(char **map, int i, int j, int size, int len)
+void	ft_char_map(char **map, int i,size_t j, t_so_long solong)
 {
-	if (j == len - 2 || i == size - 1 || j == 0 || i == 0)
+	if (j == solong.len - 2 || i == solong.size - 1 || j == 0 || i == 0)
 	{
 		ft_prnt("error3");
 		exit (1);
@@ -127,26 +132,18 @@ void	ft_char_map(char **map, int i, int j, int size, int len)
 	}
 }
 
-t_position	ft_position(char **map, int i, int j)
+void	ft_position(char **map, int i, int j, t_so_long *pos)
 {
-	t_position	exit;
-	t_position	player;
-
-
-	player.p = 0;
+	pos->num_p = 0;
 	if (map[i][j] == 'P')
 	{
-		player.i = i;
-		player.j = j;
-		player.p = 1;
-		return (player);
+		pos->i = i;
+		pos->j = j;
+		pos->num_p = 1;
 	}
 	if (map[i][j] == 'E')
 	{
-		exit.i = i;
-		exit.j = j;
-		return (exit);
+		pos->i = i;
+		pos->j = j;
 	}
-	else
-		return (player);
 }

@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 15:17:13 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/03/25 11:16:11 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/03/27 02:17:02 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@ void	ft_check_extention(int ac, char *av[])
 
 	len_ac =  ft_strlen(av[ac - 1]);
 	if (ac != 2)
-	{
-		ft_prnt("error6\n");
-		exit (1);
-	}
+		fatal("message");
 	len_ac =  ft_strlen(av[ac - 1]);
 	if (len_ac < 4)
 	{
@@ -39,18 +36,14 @@ void	ft_check_extention(int ac, char *av[])
 
 int	main(int ac, char *av[])
 {
-	
 	void	*mlx;
-	void	*image;
 	void	*win;
-	int		wd;
-	int		ht;
+	t_so_long	solong;
 	
 	ft_check_extention(ac, av);
-	ft_map(av[ac - 1]);
+	solong = ft_map(av[ac - 1]);
 	mlx = mlx_init();
-	win = mlx_new_window(mlx, 640, 360, "so long");
-	image = mlx_xpm_file_to_image(mlx, "resources/images/wall.xpm", &wd, &ht);
-	mlx_put_image_to_window(mlx, win, image, 0, 0);
+	win = mlx_new_window(mlx, (solong.len - 1)* 64, solong.size * 64, "so long");
+	ft_afch_image(mlx, win, solong);
     mlx_loop(mlx);
 }

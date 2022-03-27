@@ -1,7 +1,7 @@
 MANDATORY= so_long.c check_map.c get_next_line.c ft_strlen.c\
 			ft_strchr.c ft_substr.c ft_calloc.c\
 			ft_bzero.c ft_memset.c ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstnew_bonus.c\
-			ft_lstsize_bonus.c position.c
+			ft_lstsize_bonus.c position.c affiche_image.c
 MANDATORY:=$(addprefix src/,$(MANDATORY))
 CC=cc
 FLAGS=-Wall -Werror -Wextra -lmlx -framework OpenGl -framework AppKit

@@ -1,11 +1,11 @@
 #include "so_long.h"
 #include <stdio.h>
 
-t_position	ft_position_pec(char **map, char a, int size, int len)
+t_so_long	ft_position_pec(char **map, char a, int size, int len)
 {
 	int i;
 	int j;
-	t_position position;
+	t_so_long position;
 
 	i = 0;
 	position.p = -1;
@@ -18,7 +18,6 @@ t_position	ft_position_pec(char **map, char a, int size, int len)
 			{
 				position.i = i;
 				position.j = j;
-				position.p = a;
 				exit (0);
 			}
 			j++;
