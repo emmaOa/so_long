@@ -1,28 +1,26 @@
 #include "so_long.h"
 #include <stdio.h>
 
-t_so_long	ft_position_pec(char **map, char a, int size, int len)
+t_so_long	*ft_position_pec(t_so_long *solong)
 {
 	int i;
-	int j;
-	t_so_long position;
+	size_t j;
 
 	i = 0;
-	position.p = -1;
-	while (i < size)
+	solong->p = -1;
+	while (i < solong->size)
 	{
 		j = 0;
-		while (j < len - 1)
+		while (j < solong->len - 1)
 		{
-			if (map[i][j] == a)
+			if (solong->map[i][j] == 'P')
 			{
-				position.i = i;
-				position.j = j;
-				exit (0);
+				solong->i = i;
+				solong->j = j;
 			}
 			j++;
 		}
 		i++;
 	}
-	return (position);
+	return (solong);
 }
