@@ -1,44 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   position.c                                         :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/01 23:01:30 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/04/01 23:37:45 by iouazzan         ###   ########.fr       */
+/*   Created: 2021/12/02 15:30:47 by iouazzan          #+#    #+#             */
+/*   Updated: 2021/12/02 16:46:43 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "ft_printf.h"
 
-void fatal(char *s)
+void	ft_putnbr(int nb, int *rtn)
 {
-	ft_printf("Error\n");
-	ft_printf("%s\n", s);
-	exit(1);
-}
+	int	val;
 
-t_so_long	*ft_position_pec(t_so_long *solong)
-{
-	int		i;
-	size_t	j;
-
-	i = 0;
-	solong->p = -1;
-	while (i < solong->size)
+	val = nb;
+	if (nb == -2147483648)
 	{
-		j = 0;
-		while (j < solong->len - 1)
-		{
-			if (solong->map[i][j] == 'P')
-			{
-				solong->i = i;
-				solong->j = j;
-			}
-			j++;
-		}
-		i++;
+		ft_putstr("-2147483648", rtn);
+		return ;
 	}
-	return (solong);
+	if (nb < 0)
+	{
+		val = nb * -1;
+		ft_putchar('-', rtn);
+	}
+	if (val >= 10)
+	{
+		ft_putnbr(val / 10, rtn);
+		ft_putnbr(val % 10, rtn);
+	}
+	else
+	{
+		val = val + '0';
+		ft_putchar(val, rtn);
+	}
 }

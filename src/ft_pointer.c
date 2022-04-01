@@ -1,44 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   position.c                                         :+:      :+:    :+:   */
+/*   ft_pointer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/01 23:01:30 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/04/01 23:37:45 by iouazzan         ###   ########.fr       */
+/*   Created: 2021/12/02 14:52:13 by iouazzan          #+#    #+#             */
+/*   Updated: 2021/12/02 16:46:58 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "ft_printf.h"
 
-void fatal(char *s)
+void	ft_putnbr_h(unsigned long nb, int *rtn)
 {
-	ft_printf("Error\n");
-	ft_printf("%s\n", s);
-	exit(1);
+	char	*str;
+
+	if (nb >= 16)
+	{
+		ft_putnbr_h(nb / 16, rtn);
+		ft_putnbr_h(nb % 16, rtn);
+	}
+	else
+	{
+		str = "0123456789abcdef";
+		ft_putchar(str[nb], rtn);
+	}
 }
 
-t_so_long	*ft_position_pec(t_so_long *solong)
+void	ft_pointer(unsigned long p, int *rtn)
 {
-	int		i;
-	size_t	j;
-
-	i = 0;
-	solong->p = -1;
-	while (i < solong->size)
-	{
-		j = 0;
-		while (j < solong->len - 1)
-		{
-			if (solong->map[i][j] == 'P')
-			{
-				solong->i = i;
-				solong->j = j;
-			}
-			j++;
-		}
-		i++;
-	}
-	return (solong);
+	ft_putstr("0x", rtn);
+	ft_putnbr_h(p, rtn);
 }

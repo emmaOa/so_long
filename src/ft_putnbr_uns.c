@@ -1,44 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   position.c                                         :+:      :+:    :+:   */
+/*   ft_putnbr_uns.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/01 23:01:30 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/04/01 23:37:45 by iouazzan         ###   ########.fr       */
+/*   Created: 2021/12/02 14:50:41 by iouazzan          #+#    #+#             */
+/*   Updated: 2021/12/02 16:46:45 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "ft_printf.h"
 
-void fatal(char *s)
+void	ft_putnbr_uns(unsigned int nb, int *rtn)
 {
-	ft_printf("Error\n");
-	ft_printf("%s\n", s);
-	exit(1);
-}
+	unsigned int	val;
+	unsigned int	print;
 
-t_so_long	*ft_position_pec(t_so_long *solong)
-{
-	int		i;
-	size_t	j;
-
-	i = 0;
-	solong->p = -1;
-	while (i < solong->size)
+	val = nb;
+	if (val >= 10)
 	{
-		j = 0;
-		while (j < solong->len - 1)
-		{
-			if (solong->map[i][j] == 'P')
-			{
-				solong->i = i;
-				solong->j = j;
-			}
-			j++;
-		}
-		i++;
+		print = val / 10;
+		ft_putnbr(print, rtn);
+		print = val % 10;
+		ft_putnbr(print, rtn);
 	}
-	return (solong);
+	else
+	{
+		val = val + '0';
+		ft_putchar(val, rtn);
+	}
 }

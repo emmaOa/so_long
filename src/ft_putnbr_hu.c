@@ -1,21 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
+/*   ft_putnbr_hu.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iouazzan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/26 01:51:50 by iouazzan          #+#    #+#             */
-/*   Updated: 2021/11/26 01:51:59 by iouazzan         ###   ########.fr       */
+/*   Created: 2021/12/02 15:32:34 by iouazzan          #+#    #+#             */
+/*   Updated: 2021/12/02 16:46:47 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *lst))
+void	ft_putnbr_hu(unsigned int nb, int *rtn)
 {
-	if (!lst)
-		return ;
-	del(lst->content);
-	free(lst);
+	char	*str;
+
+	if (nb >= 16)
+	{
+		ft_putnbr_hu(nb / 16, rtn);
+		ft_putnbr_hu(nb % 16, rtn);
+	}
+	else
+	{
+		str = "0123456789ABCDEF";
+		ft_putchar(str[nb], rtn);
+	}
 }

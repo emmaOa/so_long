@@ -1,44 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   position.c                                         :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/01 23:01:30 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/04/01 23:37:45 by iouazzan         ###   ########.fr       */
+/*   Created: 2021/12/02 15:33:48 by iouazzan          #+#    #+#             */
+/*   Updated: 2021/12/02 16:47:07 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "ft_printf.h"
 
-void fatal(char *s)
+static size_t	ft_strlen(const char *str)
 {
-	ft_printf("Error\n");
-	ft_printf("%s\n", s);
-	exit(1);
-}
-
-t_so_long	*ft_position_pec(t_so_long *solong)
-{
-	int		i;
-	size_t	j;
+	size_t	i;
 
 	i = 0;
-	solong->p = -1;
-	while (i < solong->size)
+	while (str[i] != '\0')
 	{
-		j = 0;
-		while (j < solong->len - 1)
-		{
-			if (solong->map[i][j] == 'P')
-			{
-				solong->i = i;
-				solong->j = j;
-			}
-			j++;
-		}
 		i++;
 	}
-	return (solong);
+	return (i);
+}
+
+void	ft_putstr(char *str, int *rtn)
+{
+	int	len;
+
+	if (!str)
+	{
+		ft_putstr("(null)", rtn);
+		return ;
+	}
+	len = ft_strlen(str);
+	write (1, str, len);
+	*rtn += len;
 }
