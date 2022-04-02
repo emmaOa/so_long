@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 15:17:13 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/04/01 23:06:47 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/04/02 08:55:26 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,11 @@ int	key_hook(int keycode, t_so_long *solong)
 	return (0);
 }
 
+int	ft_exit(void)
+{
+	exit(1);
+}
+
 int	main(int ac, char *av[])
 {
 	t_so_long	solong;
@@ -52,6 +57,7 @@ int	main(int ac, char *av[])
 	solong.win = mlx_new_window(solong.mlx,
 			(solong.len - 1) * 64, solong.size * 64, "so long");
 	ft_afch_image(&solong);
+	mlx_hook(solong.win, 17, 0, ft_exit, NULL);
 	mlx_key_hook(solong.win, key_hook, &solong);
 	mlx_loop(solong.mlx);
 }

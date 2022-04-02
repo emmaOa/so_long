@@ -6,7 +6,7 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 18:48:31 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/04/01 23:27:03 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/04/01 23:53:28 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct t_so_long
 	void		*space;
 	void		*collectible;
 	char		**map;
-}		t_so_long;  
+}	t_so_long;
 
 t_so_long	ft_map(char *path);
 t_so_long	ft_check_map(t_so_long *solong);

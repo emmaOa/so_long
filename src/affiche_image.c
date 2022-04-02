@@ -6,12 +6,11 @@
 /*   By: iouazzan <iouazzan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 23:00:36 by iouazzan          #+#    #+#             */
-/*   Updated: 2022/04/01 23:36:54 by iouazzan         ###   ########.fr       */
+/*   Updated: 2022/04/02 21:03:41 by iouazzan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <stdio.h>
 
 t_so_long	*ft_insert_image(void *mlx, t_so_long *solong)
 {
